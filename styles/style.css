@@ -21,7 +21,6 @@ header {
   align-items: center;
   flex-wrap: wrap;
   padding: 1rem;
-  position: -webkit-sticky;
   position: sticky;
   top: 0;
   z-index: 5;
@@ -61,7 +60,7 @@ header nav ul li a:hover {
 main section.photo {
   width: 100%;
   min-height: 90vh;
-  background-image: url("../資源包1/Pictures/pexels-photo-416676.jpeg");
+  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("../資源包1/Pictures/pexels-photo-416676.jpeg");
   background-size: cover;
   background-position: center;
   position: relative;
@@ -71,32 +70,26 @@ main section.photo {
   justify-content: center;
   align-items: center;
 }
-main section.photo div.filter {
-  background-color: rgba(0, 0, 0, 0.2);
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  z-index: -1;
-}
 main section.photo h3 {
   color: white;
   font-size: 2.5rem;
   text-align: center;
 }
-main section.photo button {
+main section.photo a.btn {
   border: none;
   border-radius: 1rem;
   background-color: #3bf0e5;
-  color: white;
+  color: #eee;
+  text-decoration: none;
   margin-top: 2rem;
   padding: 0.5rem 1rem;
   font-size: 1.5rem;
   cursor: pointer;
   transition: all 0.2s ease;
 }
-main section.photo button:hover {
-  transform: scale(1.05);
+main section.photo a.btn:hover {
+  transform: scale(1.05) translateY(-2px);
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
 }
 main section.intro {
   display: flex;
@@ -149,11 +142,17 @@ main section.intro div.container div.box button {
   background-color: #09777d;
   color: white;
   font-size: 1.25rem;
-  padding: 0.25rem 0.5rem;
+  padding: 0.5rem 1rem;
   margin-top: 1rem;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  transition: all 0.2s;
+}
+main section.intro div.container div.box button:hover {
+  color: #09777d;
+  background-color: #fff;
+  box-shadow: inset 0 0 0 2px #09777d;
 }
 
 footer {
@@ -194,7 +193,148 @@ footer ul li a img {
   width: 3.5vw;
 }
 
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 3000;
+  opacity: 0;
+  visibility: hidden;
+}
+.popup__content {
+  position: relative;
+  margin: 15rem auto;
+  width: 60vw;
+  background-image: linear-gradient(105deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.9) 50%, transparent 50%), url(../資源包1/Pictures/jeremy-bishop-GIpGxe2_cT4-unsplash.jpg);
+  background-size: cover;
+  padding: 3rem;
+  box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.2);
+  transform: translateY(-50%) scale(0.25);
+  opacity: 0;
+  transition: all 0.4s 0.2s;
+}
+.popup__header {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  background-image: linear-gradient(315deg, #3bf0e5, #09777d);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  text-shadow: 0.5rem 1rem 2rem rgba(0, 0, 0, 0.2);
+}
+.popup:target {
+  opacity: 1;
+  visibility: visible;
+}
+.popup:target .popup__content {
+  opacity: 1;
+  transform: scale(1);
+}
+.popup__close:link, .popup__close:visited {
+  font-size: 1.5rem;
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  text-decoration: none;
+  color: #fff;
+  font-weight: 700;
+  transition: color 0.2s;
+}
+.popup__close:hover {
+  color: #3bf0e5;
+}
+.popup__footer {
+  margin-top: 2rem;
+  font-size: 0.8rem;
+}
+.popup__footer a:link,
+.popup__footer a:visited {
+  color: #09777d;
+  text-decoration: none;
+}
+.popup__footer a:hover {
+  border-bottom: 1px solid currentColor;
+}
+
+.form {
+  width: 45%;
+}
+.form__label {
+  color: #4d4d4d;
+  display: block;
+}
+.form__input {
+  margin-top: 0.5rem;
+  margin-bottom: 1.5rem;
+  padding: 0.5rem;
+  width: 90%;
+  border: none;
+  background-color: #fff;
+  border-bottom: 3px solid transparent;
+  transition: all 0.2s;
+}
+.form__input:focus {
+  outline: none;
+  border-bottom: 3px solid #3bf0e5;
+}
+.form__input:focus:invalid {
+  border-bottom: 3px solid red;
+}
+.form__btn {
+  margin-top: 1rem;
+  background-color: #09777d;
+  color: #fff;
+  border: none;
+  border-radius: 100px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+.form__btn:focus {
+  animation: pulsate 1s infinite;
+}
+
+@keyframes pulsate {
+  0% {
+    transform: scale(1);
+    box-shadow: none;
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.4);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: none;
+  }
+}
+@media screen and (max-width: 800px) {
+  html {
+    font-size: 90%;
+  }
+  .popup__content {
+    background-image: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), url(../資源包1/Pictures/jeremy-bishop-GIpGxe2_cT4-unsplash.jpg);
+  }
+  .popup__close:link, .popup__close:visited {
+    color: #09777d;
+    transition: color 0.2s;
+  }
+  .popup__close:hover {
+    color: #3bf0e5;
+  }
+  .form {
+    width: 100%;
+  }
+  .form__label {
+    width: 100%;
+  }
+}
 @media screen and (max-width: 550px) {
+  html {
+    font-size: 80%;
+  }
   header div.logo {
     margin-left: 0.5rem;
   }
@@ -212,5 +352,9 @@ footer ul li a img {
   footer ul li a img {
     width: 10vw;
     height: 10vw;
+  }
+  .popup__header {
+    color: #09777d;
+    text-shadow: none;
   }
 }/*# sourceMappingURL=style.css.map */
